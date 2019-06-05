@@ -18,9 +18,15 @@ def respRes():
     if request.is_json:
         print(request.json)
         content=request.get_json()
-        content['name']="tintin au tibet"
-        content['author']="Herge"
-        content['date']="1960"
-        content[ 'type']='BD'
-        content['id']='BDT9H2'
+        if content['action']=='delete':
+            content['success']=True
+            return jsonify(content)
+        elif content['action']=='researchDoc':            
+            content['name']="tintin au tibet"
+            content['author']="Herge"
+            content['date']="1960"
+            content[ 'type']='BD'
+            content['id']='BDT9H2'
+        elif content['action']=='editMeta':
+            return jsonify(content)
     return jsonify(content)
